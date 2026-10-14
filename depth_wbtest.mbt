@@ -24,10 +24,15 @@ test "grid budgets and floating precision are enforced" {
   )
   assert_true(
     try {
-      ignore(depth_grid(1.0e20, 1.0e20, 0.1))
+      ignore(depth_grid(1.0e20, 1.0e20 + 65536.0, 1.0))
       false
     } catch {
       _ => true
     },
   )
+}
+
+///|
+test "singleton grid is valid at large finite offsets" {
+  assert_eq(depth_grid(1.0e20, 1.0e20, 0.1), [1.0e20])
 }

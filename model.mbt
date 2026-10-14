@@ -102,6 +102,10 @@ pub fn validate(log : Log) -> Unit raise WellError {
   if log.rows.length() > 1000000 {
     fail("row limit is 1000000")
   }
+  if log.rows.length().to_double() * log.curves.length().to_double() >
+    10000000.0 {
+    fail("log cell budget is 10000000")
+  }
   if !finite(log.null_value) {
     fail("null sentinel must be finite")
   }
@@ -161,11 +165,22 @@ pub fn validate(log : Log) -> Unit raise WellError {
   for h in all_headers {
     if !valid_name(h.name) ||
       !safe_text(h.value) ||
+      h.value.contains(":") ||
       !safe_text(h.unit) ||
       h.unit.contains(" ") ||
+      h.unit.contains("\t") ||
       h.unit.contains(":") ||
       !safe_text(h.description) {
       fail("unsafe header: " + h.name)
+    }
+  }
+  for collection in [log.headers, log.parameters] {
+    for i in 0..<collection.length() {
+      for j in 0..<i {
+        if canonical(collection[i].name) == canonical(collection[j].name) {
+          fail("duplicate metadata mnemonic")
+        }
+      }
     }
   }
   for line in log.other {

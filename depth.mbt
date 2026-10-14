@@ -97,6 +97,9 @@ pub fn depth_grid(
       fail("grid step below floating point resolution")
     }
     grid.push(d)
+    if d == stop {
+      break
+    }
   }
   grid
 }

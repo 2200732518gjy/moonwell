@@ -63,6 +63,15 @@ pub fn parse(text : String) -> Log raise WellError {
   )
   if rows.length() > 0 {
     let start = parse_number(header_value(h.well, "STRT").value)
+    let declared_step = parse_number(header_value(h.well, "STEP").value)
+    if declared_step != 0.0 {
+      for i in 1..<rows.length() {
+        let delta = rows[i][0].unwrap() - rows[i - 1][0].unwrap()
+        if (delta - declared_step).abs() > 1.0e-8 * (1.0 + declared_step.abs()) {
+          fail("STEP disagrees with ASCII depth intervals")
+        }
+      }
+    }
     let stop = parse_number(header_value(h.well, "STOP").value)
     let first = rows[0][0].unwrap()
     let last = rows[rows.length() - 1][0].unwrap()

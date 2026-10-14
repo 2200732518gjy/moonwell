@@ -117,15 +117,28 @@ pub fn assemble(
       runs[run].curves[0].name,
       curves[0].unit,
     )
+    let normalized_curves = normalized.curves.copy()
+    let normalized_rows = normalized.rows.map(row => row.copy())
     for c in 1..<normalized.curves.length() {
       let incoming = normalized.curves[c]
       for target in curves {
         if canonical(target.name) == canonical(incoming.name) {
-          normalized = convert_curve(normalized, incoming.name, target.unit)
+          ignore(convert_value(0.0, incoming.unit, target.unit))
+          for row in normalized_rows {
+            if row[c] is Some(v) {
+              row[c] = Some(convert_value(v, incoming.unit, target.unit))
+            }
+          }
+          normalized_curves[c] = {
+            name: incoming.name,
+            unit: target.unit,
+            description: incoming.description,
+          }
           break
         }
       }
     }
+    normalized = rebuild(normalized, normalized_curves, normalized_rows)
     let sorted = ascending(normalized)
     for c in 1..<sorted.curves.length() {
       let mut output = 0
