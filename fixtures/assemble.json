@@ -1,0 +1,19 @@
+{
+  "command": "assemble",
+  "runs": [
+    {
+      "name": "run-one",
+      "las": "~Version\nVERS. 2.0 : LAS version\nWRAP. NO : wrapping\n~Well\nSTRT.M 0 : start\nSTOP.M 2 : stop\nSTEP.M 1 : step\nNULL. -999.25 : null\nWELL. SYNTHETIC : handwritten fixture\n~Curve\nDEPT.M : depth\nGR.GAPI : gamma\n~ASCII\n0 10\n1 -999.25\n2 30\n"
+    },
+    {
+      "name": "run-two",
+      "las": "~Version\nVERS. 2.0 : LAS version\nWRAP. NO : wrapping\n~Well\nSTRT.M 0 : start\nSTOP.M 2 : stop\nSTEP.M 1 : step\nNULL. -999.25 : null\nWELL. SYNTHETIC : handwritten fixture\n~Curve\nDEPT.M : depth\nGR.GAPI : gamma\n~ASCII\n0 11\n1 -999.25\n2 30\n"
+    }
+  ],
+  "start": 0,
+  "stop": 2,
+  "step": 1,
+  "max_gap": 2,
+  "policy": "last",
+  "tolerance": 0
+}

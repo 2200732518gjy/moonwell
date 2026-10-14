@@ -1,0 +1,7 @@
+import {
+  "2200732518gjy/moonwell" @well,
+}
+
+supported_targets = "js"
+
+pkgtype(kind: "executable")
