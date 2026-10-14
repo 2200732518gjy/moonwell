@@ -1,0 +1,206 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "2200732518gjy/moonwell"
+
+// Values
+pub fn affine_curve(Log, String, Double, Double) -> Log raise WellError
+
+pub fn append_curve(Log, Curve, Array[Double?]) -> Log raise WellError
+
+pub fn ascending(Log) -> Log raise WellError
+
+pub fn assemble(Array[Log], Array[String], Array[Double], Double, ConflictPolicy, tolerance? : Double) -> Assembly raise WellError
+
+pub fn assembly_report(Assembly) -> Json raise WellError
+
+pub fn convert_curve(Log, String, String) -> Log raise WellError
+
+pub fn convert_value(Double, String, String) -> Double raise WellError
+
+pub fn curve_index(Log, String) -> Int raise WellError
+
+pub fn depth_grid(Double, Double, Double, limit? : Int) -> Array[Double] raise WellError
+
+pub fn depths(Log) -> Array[Double] raise WellError
+
+pub fn dispatch(Json) -> Json raise WellError
+
+pub fn execute(String) -> String
+
+pub fn fill_constant(Log, String, Double) -> Log raise WellError
+
+pub fn fill_linear(Log, String, Double) -> Log raise WellError
+
+pub fn gradient_curve(Log, String, String, Double) -> Log raise WellError
+
+pub fn interval_report(IntervalSummary) -> Json
+
+pub fn make_log(Array[Curve], Array[Array[Double?]], headers? : Array[Header], parameters? : Array[Header], other? : Array[String], null_value? : Double) -> Log raise WellError
+
+pub fn mask_range(Log, String, Double, Double) -> Log raise WellError
+
+pub fn median_filter(Log, String, Int, Double) -> Log raise WellError
+
+pub fn missing_spans(Log, String) -> Array[MissingSpan] raise WellError
+
+pub fn parse(String) -> Log raise WellError
+
+pub fn parse_header(String) -> Header raise WellError
+
+pub fn parse_number(String) -> Double raise WellError
+
+pub fn provenance_csv(Assembly) -> String raise WellError
+
+pub fn quality_check(Log, Array[QcRule], Double) -> Array[Issue] raise WellError
+
+pub fn quality_report(Log, Array[QcRule], Double) -> Json raise WellError
+
+pub fn quantile(Log, String, Double) -> Double? raise WellError
+
+pub fn read_header(String) -> LasHeader raise WellError
+
+pub fn read_report(String) -> Json raise WellError
+
+pub fn rename_curve(Log, String, String) -> Log raise WellError
+
+pub fn report_text(Json) -> String
+
+pub fn resample(Log, Array[Double], Double) -> Log raise WellError
+
+pub fn sample(Log, String, Double, Double) -> Double? raise WellError
+
+pub fn select(Log, Array[String]) -> Log raise WellError
+
+pub fn summarize(Log, String) -> Summary raise WellError
+
+pub fn summarize_interval(Log, String, Double, Double, Double) -> IntervalSummary raise WellError
+
+pub fn validate(Log) -> Unit raise WellError
+
+pub fn validate_assembly(Assembly) -> Unit raise WellError
+
+pub fn window(Log, Double, Double) -> Log raise WellError
+
+pub fn write_csv(Log, include_units? : Bool) -> String raise WellError
+
+pub fn write_las(Log, wrapped? : Bool) -> String raise WellError
+
+// Errors
+pub(all) suberror WellError {
+  WellError(String)
+}
+
+// Types and methods
+pub struct Assembly {
+  log : Log
+  sources : Array[Array[CellSource?]]
+  conflicts : Array[Conflict]
+  run_names : Array[String]
+}
+
+pub struct CellSource {
+  run : Int
+  interpolated : Bool
+}
+
+pub struct Conflict {
+  row : Int
+  curve : String
+  depth : Double
+  kept_run : Int
+  incoming_run : Int
+  kept_value : Double
+  incoming_value : Double
+}
+
+pub(all) enum ConflictPolicy {
+  Reject
+  PreferFirst
+  PreferLast
+}
+
+pub(all) struct Curve {
+  name : String
+  unit : String
+  description : String
+}
+
+pub struct DataLine {
+  number : Int
+  text : String
+}
+
+pub(all) struct Header {
+  name : String
+  unit : String
+  value : String
+  description : String
+}
+
+pub struct IntervalSummary {
+  start : Double
+  stop : Double
+  covered : Double
+  coverage : Double
+  integral : Double
+  weighted_mean : Double?
+  segments : Int
+}
+
+pub struct Issue {
+  code : String
+  curve : String
+  row : Int
+  depth : Double
+  message : String
+}
+
+pub struct LasHeader {
+  curves : Array[Curve]
+  well : Array[Header]
+  parameters : Array[Header]
+  other : Array[String]
+  data : Array[DataLine]
+  wrapped : Bool
+  null_value : Double
+}
+
+pub struct Log {
+  curves : Array[Curve]
+  rows : Array[Array[Double?]]
+  headers : Array[Header]
+  parameters : Array[Header]
+  other : Array[String]
+  null_value : Double
+}
+
+pub struct MissingSpan {
+  first_row : Int
+  last_row : Int
+  start_depth : Double
+  stop_depth : Double
+  count : Int
+  bounded : Bool
+}
+
+pub(all) struct QcRule {
+  curve : String
+  minimum : Double?
+  maximum : Double?
+  max_gradient : Double?
+  constant_run : Int
+}
+
+pub struct Summary {
+  present : Int
+  missing : Int
+  coverage : Double
+  minimum : Double?
+  maximum : Double?
+  mean : Double?
+  variance : Double?
+  median : Double?
+}
+
+// Type aliases
+
+// Traits
