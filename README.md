@@ -77,7 +77,7 @@ moon run examples --target wasm-gc --deny-warn
 python tools/audit.py
 ~~~
 
-Repeat target checks/tests/build/examples with wasm, js and native. Native requires a system C compiler (gcc/clang). Local Windows evidence: 40/40 tests per wasm-gc, wasm and js, strict builds and examples, CLI acceptance, **32/32 synthetic numerical differential cases against lasio 0.32**. Local native strict check passed; execution requires the missing system C compiler, so the four-target Linux CI is the native execution gate. CI logs record its actual toolchain, not a fabricated local native result.
+Repeat target checks/tests/build/examples with wasm, js and native. Native requires a system C compiler (gcc/clang). Local Windows evidence: 40/40 tests per wasm-gc, wasm and js, strict builds and examples, CLI acceptance, **32/32 synthetic numerical differential cases against lasio 0.32**. Local native strict check passed; execution requires the missing system C compiler, so the four-target Linux CI is the native execution gate. CI pins the official development compiler bundle `0.10.14+7d59c7ec9` (the archive uses the compiler version, not the standalone moon CLI version) and records its actual toolchain. No local native execution is claimed.
 
 Optional independent oracle:
 

@@ -21,7 +21,7 @@ jobs:
           MOONBIT_INSTALL_DEV: '1'
         run: |
           curl --fail --location https://cli.moonbitlang.com/install/unix.sh -o /tmp/moon-install.sh
-          bash /tmp/moon-install.sh latest
+          bash /tmp/moon-install.sh '0.10.14+7d59c7ec9'
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
       - name: Record toolchain
         run: |
