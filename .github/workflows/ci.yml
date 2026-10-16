@@ -40,8 +40,21 @@ jobs:
           moon build --target ${{ matrix.target }} --release --deny-warn
           moon run examples --target ${{ matrix.target }} --deny-warn
           moon run examples/compliance --target ${{ matrix.target }} --deny-warn
+          moon run examples/strict --target ${{ matrix.target }} --deny-warn
       - name: Real CLI acceptance
         if: matrix.target == 'js'
         run: node tools/test-cli.mjs
+      - name: Independent exact-decimal conformance corpus
+        if: matrix.target == 'js'
+        run: |
+          python3 tools/make-conformance-corpus.py
+          git diff --exit-code -- fixtures/las2-conformance.json
+          python3 tools/verify-conformance.py
+      - name: Independent lasio numerical and metadata oracles
+        if: matrix.target == 'js'
+        run: |
+          python3 -m pip install lasio==0.32 numpy==2.3.5
+          python3 tools/differential.py
+          python3 tools/verify-las2.py
       - name: Core LOC audit
         run: python3 tools/audit.py --minimum-lines 1500 --minimum-commits 20

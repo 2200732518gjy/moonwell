@@ -1,0 +1,1090 @@
+{
+  "baseline": "CWLS LAS 2.0 January 2014",
+  "synthetic": true,
+  "cases": [
+    {
+      "name": "complete-empty-metadata-values",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "3",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.5",
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "no-final-terminator",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30",
+      "valid": true,
+      "clauses": [
+        "3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "comments-and-predata-blanks",
+      "las": "# synthetic\r\n\r\n~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n# comment\r\n\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.1"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "regional-identifiers",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nCNTY. : county\r\nSTAT. : state\r\nCTRY. : country\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "api-instead-of-uwi",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nAPI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "equivalent-decimal-scales",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M -0.0000 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "opaque-codes-spaces-leading-zero",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 00  001 02 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.5"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "missing-optional-api-code",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI  : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.5"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "legal-mnemonic-punctuation",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR/RAW+%_!$&*()[]{}.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.2",
+        "5.5"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "spaces-before-dot",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\n  GR   .GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.2"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "units-may-contain-dots",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.G.API 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.2"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "duplicate-curve-document",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nDEPT.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.5"
+      ],
+      "model": false,
+      "kind": "standard"
+    },
+    {
+      "name": "customer-and-duplicate-parameter-document",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~P\r\nX. 1 : first\r\nX. 2 : second\r\n~Z customer\r\n# raw comment  \r\n\r\n  opaque payload  \r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "3",
+        "5.6",
+        "5.7"
+      ],
+      "model": false,
+      "kind": "standard"
+    },
+    {
+      "name": "optional-other-unstructured",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~O\r\nraw text: dots.are.not.headers\r\n\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.7"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "optional-parameter-values-with-colons",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~P\r\nRUN/ID. A:B:C : run\r\nVALUE.M +.125 : value\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.2",
+        "5.6"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "extra-version-lines",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\nSOURCE. SYNTHETIC : source\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "irregular-zero-step",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 0 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "depth-unit-F",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.F 0 : start\r\nSTOP.F 2 : stop\r\nSTEP.F 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.F : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "depth-unit-FT",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.FT 0 : start\r\nSTOP.FT 2 : stop\r\nSTEP.FT 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.FT : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "increasing-time",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.S 0 : start\r\nSTOP.S 2 : stop\r\nSTEP.S 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nTIME.S : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.4",
+        "5.5"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "descending-depth",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 2 : start\r\nSTOP.M 0 : stop\r\nSTEP.M -1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n2 10\r\n1 -999.25\r\n0 30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "descending-time",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.S 2 : start\r\nSTOP.S 0 : stop\r\nSTEP.S -1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nTIME.S : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n2 10\r\n1 -999.25\r\n0 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "wrapped",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. YES : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0\r\n10\r\n1\r\n-999.25\r\n2\r\n30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.3",
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "wrapped-exact80",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. YES : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0\r\n                                                                            10\r\n1\r\n-999.25\r\n2\r\n30\r\n",
+      "valid": true,
+      "clauses": [
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "wrapped-exact80-unterminated",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. YES : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0\r\n10\r\n1\r\n-999.25\r\n2\r\n                                                                              30",
+      "valid": true,
+      "clauses": [
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "wrapped-too-wide-padding",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. YES : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0\r\n                                                                             10\r\n1\r\n-999.25\r\n2\r\n30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "wrapped-index-not-alone",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. YES : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1\r\n-999.25\r\n2\r\n30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "wrapped-incomplete-record",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. YES : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0\r\n10\r\n1\r\n-999.25\r\n2\r\n",
+      "valid": false,
+      "clauses": [
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "wrapped-cross-record",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. YES : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0\r\n10 1\r\n-999.25\r\n2\r\n30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "missing-header-VERS",
+      "las": "~V\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "missing-header-WRAP",
+      "las": "~V\r\nVERS. 2.0 : version\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "missing-header-STRT",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "missing-header-STOP",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "missing-header-STEP",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "missing-header-NULL",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "missing-header-COMP",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "missing-header-WELL",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "missing-header-FLD",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "missing-header-LOC",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "missing-header-SRVC",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "missing-header-DATE",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "duplicate-required-VERS",
+      "las": "~V\r\nVERS. 2.0 : version\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "duplicate-required-WRAP",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "duplicate-required-STRT",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "duplicate-required-COMP",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "duplicate-required-PROV",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "duplicate-required-UWI",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "regional-alternative-missing",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nCNTY. : county\r\nSTAT. : state\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "identifier-missing",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "invalid-version",
+      "las": "~V\r\nVERS. 3.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "version-unit",
+      "las": "~V\r\nVERS.M 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "invalid-wrap",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. MAYBE : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "wrap-unit",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP.M NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "invalid-depth-name",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nINDEX.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.5"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "invalid-depth-unit",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.CM : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "mismatched-grid-unit",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.FT 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "null-unit",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL.M -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "endpoint-start",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 1 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "1",
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "endpoint-stop",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 3 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "1",
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "wrong-step",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 0.5 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "1",
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "step-rounding",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1.000000000000000000001 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "1",
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "endpoint-rounding",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2.000000000000000000001 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "1",
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "off-grid-integer-quotient",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0.25 : start\r\nSTOP.M 1.25 : stop\r\nSTEP.M 0.5 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0.25 10\r\n0.75 -999.25\r\n1.25 30\r\n",
+      "valid": false,
+      "clauses": [
+        "1",
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "invalid-number-1e0",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1e0 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3",
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "invalid-number-NaN",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\nNaN -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3",
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "invalid-number-inf",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\ninf -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3",
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "invalid-number-1,0",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1,0 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3",
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "invalid-number-1_0",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1_0 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3",
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "invalid-number---1",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n--1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3",
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "invalid-number-1.2.3",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1.2.3 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3",
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "invalid-number-+",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n+ -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3",
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "invalid-number-.",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n. -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3",
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "index-null",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. 0 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.5"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "repeated-index",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n0 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "reversed-index",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n3 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.4"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "ragged-row",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.5",
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "extra-column",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 2 3\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.5",
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "data-comment",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n# comment\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.1",
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "data-blank",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "missing-section-V",
+      "las": "~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "missing-section-W",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "missing-section-C",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "missing-section-A",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n",
+      "valid": false,
+      "clauses": [
+        "3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "duplicate-section-V",
+      "las": "~V\r\n~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "duplicate-section-W",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "duplicate-section-C",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "duplicate-section-P",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~P\r\n~P\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "duplicate-section-O",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~O\r\n~O\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "duplicate-section-A",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "section-after-ascii",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n~O\r\ntext\r\n",
+      "valid": false,
+      "clauses": [
+        "3",
+        "5.8"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "version-not-first",
+      "las": "~Z customer\r\n~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3",
+        "5.3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "lowercase-reserved-marker",
+      "las": "~v\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.1"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "header-delimiter-dot",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.2"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "header-delimiter-space",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI:gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.2"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "header-delimiter-colon",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.2"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "header-delimiter-mnemonic-space",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nG R.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "5.2"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "encoding-tab",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN\tCASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "encoding-non-ascii",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYNéCASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "encoding-nul",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN\u0000CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "encoding-bare-cr",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN\rCASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 10\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "lf-not-crlf",
+      "las": "~V\nVERS. 2.0 : version\nWRAP. NO : layout\n~W\nSTRT.M 0 : start\nSTOP.M 2 : stop\nSTEP.M 1 : step\nNULL. -999.25 : null\nCOMP. : company\nWELL. SYN:CASE : well\nFLD. : field\nLOC. : location\nPROV. : province\nSRVC. : service\nDATE. : date\nUWI. : identifier\n~C\nDEPT.M : depth\nGR.GAPI 07 010 01 00 : gamma\n~A\n0 10\n1 -999.25\n2 30\n",
+      "valid": false,
+      "clauses": [
+        "3"
+      ],
+      "model": true,
+      "kind": "standard"
+    },
+    {
+      "name": "large-decimal-model-limit",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "3",
+        "5.8"
+      ],
+      "model": false,
+      "kind": "standard"
+    },
+    {
+      "name": "underflow-model-limit",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "3",
+        "5.8"
+      ],
+      "model": false,
+      "kind": "standard"
+    },
+    {
+      "name": "false-null-model-limit",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 -999.250000000000000000000001\r\n1 -999.25\r\n2 30\r\n",
+      "valid": true,
+      "clauses": [
+        "3",
+        "5.8"
+      ],
+      "model": false,
+      "kind": "standard"
+    },
+    {
+      "name": "numeric-resource-limit",
+      "las": "~V\r\nVERS. 2.0 : version\r\nWRAP. NO : layout\r\n~W\r\nSTRT.M 0 : start\r\nSTOP.M 2 : stop\r\nSTEP.M 1 : step\r\nNULL. -999.25 : null\r\nCOMP. : company\r\nWELL. SYN:CASE : well\r\nFLD. : field\r\nLOC. : location\r\nPROV. : province\r\nSRVC. : service\r\nDATE. : date\r\nUWI. : identifier\r\n~C\r\nDEPT.M : depth\r\nGR.GAPI 07 010 01 00 : gamma\r\n~A\r\n0 99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\r\n1 -999.25\r\n2 30\r\n",
+      "valid": false,
+      "clauses": [
+        "budget"
+      ],
+      "model": false,
+      "kind": "resource"
+    }
+  ]
+}

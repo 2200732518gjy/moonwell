@@ -1,0 +1,5 @@
+import {
+  "2200732518gjy/moonwell" @well,
+}
+
+pkgtype(kind: "executable")

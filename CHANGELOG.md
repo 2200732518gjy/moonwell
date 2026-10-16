@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0 — 2026-10-16
+
+- Add immutable source-document archival, ordered duplicate entries and structured standard/resource diagnostics, explicitly separate from finite-Double numerical-model errors.
+- Implement the declared CWLS January-2014 strict baseline: complete well headers and regional identifiers, encoding/CRLF, sections, index/time rules, exact decimal endpoints/intervals/divisibility and WRAP physical widths.
+- Add strict parse/conversion/write APIs and validate/archive/strict-normalize protocol commands; retain compatibility APIs without conformance claims.
+- Expand output exponents to exact roundtrip decimals and compute STEP from serialized coordinates; reject underflow and false NULL collapse rather than silently changing meaning.
+- Add 105 deterministic conformance cases, independent Python structure/Decimal validation, public strict workflows and CI integration with existing lasio oracles.
+- Replace the former known-gap roadmap with implemented rule/evidence mappings. No latest-edition, CWLS certification or organizer-acceptance claim.
+
 ## 0.2.0 — 2026-10-16
 
 - Breaking: add `Curve.api_code`; use an empty string for absent codes. Preserve opaque codes through reader/writer and transforms; assembly fills missing definitions and rejects contradictory nonempty codes.

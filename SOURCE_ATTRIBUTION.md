@@ -1,6 +1,6 @@
 # References, licensing and AI use
 
-Original MoonBit implementation, MIT license. No upstream implementation was translated or copied. Production dependency is the bundled official moonbitlang/core (string/JSON and builtins). All LAS fixtures are handwritten or deterministically generated synthetic data, with no third-party logging dataset.
+Original MoonBit implementation, MIT license. No upstream implementation was translated or copied. Production dependency is the bundled official moonbitlang/core (string/JSON, BigInt and builtins). All LAS fixtures are handwritten or deterministically generated synthetic data, with no third-party logging dataset.
 
 Design references: lasio documentation for header, data and writing semantics:
 - https://lasio.readthedocs.io/en/latest/header-section.html
@@ -18,3 +18,5 @@ This is a primary standards document hosted by a third-party mirror, not a norma
 AI disclosure: Codex assisted topic research, original code, tests, documentation and delivery automation. The participant account owns the repository. Tests/CI/oracle checks provide bounded evidence; AI assistance and passing tests do not prove domain correctness, standard conformance or safety. No invented benchmark or performance advantage is claimed.
 
 Adjacent packages were read for semantic duplication review, not copied: Touchstone, MoonNIfTI, MoonBit geofield, MoonSeis and CF Ocean. See docs/competition/duplicate-check.md.
+
+Version 0.3.0: exact-decimal grid validation uses the official `moonbitlang/core/bigint` implementation as a dependency, not vendored code. `tools/verify-conformance.py` is an independently implemented Python structural/Decimal checker within this project, not CWLS software or independent institutional certification. Its inputs are deterministic synthetic fixtures; the CWLS PDF is referenced, not redistributed. The normative baseline is frozen January 2014; later revisions have not been verified.

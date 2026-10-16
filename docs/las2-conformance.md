@@ -1,91 +1,65 @@
-# LAS 2.0 标准处理、案例与完整合规终点
+# LAS 2.0 标准处理、已实施规则与验收证据
 
-更新时间：2026-10-16；实现版本：0.2.0。本文是公开工程说明，不是报名资料或认证证书。
+更新时间：2026-10-16；实现版本：0.3.0。这是公开工程说明，不是申报书或认证证书。
 
-## 1. 标准基线与声明边界
+## 基线与声明范围
 
-基线为 CWLS LAS Committee 的 **LAS Version 2.0: A Digital Standard for Logs, Update January 2014**（14 页）。取得的是作者原始 PDF 在 lasio 仓库的镜像，而不是把 lasio 宽容解析行为当成标准：
+本版本冻结 **CWLS LAS Committee《LAS Version 2.0: A Digital Standard for Logs》，January 2014 update**，不声称它是最新修订，也不声称取得 CWLS Certify 或主办方认证。作者原规范的可验证镜像位于 lasio 仓库 `standards/LAS_20_Update_Jan2014.pdf`；原文件 SHA256 为 `48c9bc54c782f374ef4e43d8a8bb10152b487217f099ff729897a6c89a1d7fda`。规范没有随包复制。未取得可校验的 2017 修订正文，因此不宣称已完成两版本差异比对。
 
-- https://github.com/kinverarity1/lasio/blob/main/standards/LAS_20_Update_Jan2014.pdf
-- SHA256 `48c9bc54c782f374ef4e43d8a8bb10152b487217f099ff729897a6c89a1d7fda`
+规范 §4 明确打印文档优先于验证程序。其最后一个时间示例用 ETIM，而 §5.5 正文仅列 DEPT/DEPTH/TIME；这里按规范性正文接受 TIME，不以示例冲突扩大规则。DATE 的 yyyy mm dd 是建议格式，不强制非空或编造日期。文件扩展名 .LAS 属于文件交付约定；接收 String 的 API 不检查未知文件名。
 
-直接 CWLS HTTPS 访问未通过证书验证，未关闭 TLS 校验。2017 修订版尚未取得并比对；因此不宣称最新版全覆盖。PDF 仅本地研究保存，没有随包再分发。
+## 四条显式处理路径
 
-必须区分三个概念：
+1. **原文档接收**：`read_las_document` / `document_text` 保存输入 String 的全部内容，不重建、不丢重复项、注释、空行、节顺序、CRLF、数值拼写。接收本身不是合法性判定，也允许保存待修复的非法文件；非文本原始字节及编码探测不在此 API 内。
+2. **严格验证**：`check_las2` 返回 `LasDiagnostic {kind,clause,section,line,field,message}`；`las2_report` 返回 JSON。空诊断代表指定基线和公开预算内通过，不代表数据的地质真实性。缺失字段的 line=0 表示没有可定位的原文行。
+3. **数值分析转换**：`document_to_log` / `parse_strict` 先严格验证，再转为唯一列名、有限 Double 的 `Log`。合法重复曲线/参数、超范围数、非零下溢、索引折叠或假 NULL 碰撞等转换问题以 `model:` 明确拒绝；原文仍可保存。这些不是把合法文档判成格式非法。`document_entries` 提供按原序包含重复项的头字段，坏头不会静默丢失。
+4. **严格写出**：`write_las_strict` 无指数十进制输出，重新精确计算 STEP，随后再次严格验证。缺少井头、非整除网格或 WRAP 行放不下数值时拒绝，不编造井名/公司/位置，不四舍五入观测、不自动挪动 STRT。原有 `parse` / `write_las` 保持兼容用途；兼容成功从不等于严格通过。
 
-1. **标准允许的语法**：不能仅因为实现不方便就称为非法。曲线 API 代码、多段数字代码、合法标点助记符、值中的冒号、自定义节、TIME 索引均属于需要正确处理的输入。
-2. **数值分析模型限制**：有限 Double、矩形表、唯一列名、非空严格单调索引及工作量上限。拒绝这些输入表示不能进入此模型，不等于已证明输入违反 LAS。
-3. **完整标准合规验证**：需要涵盖所有规范条款的正反例，且写出结果也满足规范。当前 `parse`/`validate` 不承担这一认证；0.2.0 **尚未达到**完整合规终点，不能将“可读取”解释成“符合完整标准”。
+## 条款—实现—正反例矩阵
 
-## 2. 条款处理矩阵
+全部合成案例在 `fixtures/las2-conformance.json`，每例包含名称、原文、预期、条款和模型可转换性。生成器 `tools/make-conformance-corpus.py` 确保可复现；严格实现位于 `strict.mbt`、`decimal.mbt`、`document.mbt`、`lex.mbt`、`writer.mbt`。
 
-状态“实现”仅说明所列行为已有实现/测试；不意味着整条规范已经认证。所有未完成项都是完整合规的阻断项，不能改成永久排除范围后仍称完整合规。
-
-| CWLS 条款 | 当前处理与证据 | 完整合规剩余工作及失败方式 |
+| 条款 | 已实施行为 | 正例 / 反例名称（示例） |
 |---|---|---|
-| §3、§5.1 节、注释、顺序 | V 必须在首节，V/W/C 在 A 前，A 最后；保留客户节内容和额外 V 行；重复保留节显式报错。`header.mbt`、`compliance_wbtest.mbt` | 完成所有节排列/空行/大小写/重复节正反例；需要区分严格规范和兼容输入。客户节只透传，不解释业务含义 |
-| §5.2 三分隔符 | 第一个点、点后的首个空白、**最后一个冒号**；支持值内冒号；描述不允许冒号以防重新读取改变字段。`lex.mbt`、`lex_wbtest.mbt` | 严格模式应仅认规范的 ASCII 空格；当前兼容接受 TAB，不能据此颁发标准通过结果 |
-| §5.2 MNEM/UNITS | 支持无空格/点/冒号的可打印助记符，包括 `GR/RAW+`；避免首字符 `#`/`~` 被误识别；单位直接跟随点 | 针对全部允许字符、字段边界、控制字符系统化测试；重复列名是数值模型限制，不宣称规范禁止 |
-| §5.3 VERS/WRAP | VERS=2.0、YES/NO；额外版本行进入 `version_headers`；writer 重建必要两行 | 区分额外合法行与重复必需行；严格模式验证无单位等细节 |
-| §5.4 STRT/STOP/STEP/NULL | 检查必需四项、单位一致、非零 STEP 与每段间距、起止与数据；STEP=0 支持非等间隔 | 当前误差容限为数值处理策略，不是规范的“不允许舍入”。终点需十进制定点/有理数比较及 STRT/STEP、STOP/STEP 整除判断，不能用浮点近似替代 |
-| §5.4 其他必需井头 | 已读取、保留、写出 COMP/WELL/FLD/LOC/PROV 或地区替代项、SRVC/DATE、UWI/API 等；案例含完整井头 | 当前不强制存在所有必需井头/地域分支。终点要按规则逐项给出缺失错误；空值与缺失字段分开处理，不能伪造公司/井号 |
-| §5.4/5.5 深度或时间索引 | 数值索引可读；标准助记符 DEPT/DEPTH/TIME 均可进入模型；有 TIME 正例 | 严格验证首曲线助记符、深度单位 M/F/FT、TIME 递增；当前通用模型允许其他名称/单位及降序，不能把模型 validate 当标准 validator |
-| §5.5 **可选 API 曲线代码** | `Curve.api_code: String` 保留整个第三字段、内部空格与前导零；缺省空串；不当作数值样本；两种 WRAP 布局、选列/改名/重采样/单位转换均保留 | 不做 API 注册表语义认证，不猜码、不删码。非空定义冲突合并时明确拒绝；空代码可由后续测次补齐。见下文案例 |
-| §5.6 P 参数 | 数字/文本/带冒号值均保留；同名字段当前显式拒绝 | 独立文件模型应保存条目次序和可能重复的名称；必要时再拒绝转换到唯一名称的分析模型，不能静默覆盖 |
-| §5.7 O、自定义节 | O 与客户节内容保留，未知节不再一概拒绝；`LasSection` 数组按构造快照；writer 将客户节放在 A 前 | 不承诺字节级往返：客户节空行/行末空白、标准节注释和原始顺序不全部保留。要做到无损档案处理需独立源文档层 |
-| §3、§5.8 ASCII 数值、NULL | 有限十进制及兼容 E 指数读取，列宽验证；NULL 转 None；writer 拒绝真实样本与 sentinel 冲突 | 2014 基线不允许指数数据；当前 Double 字符串可能产生指数，故 writer 尚非全面标准写出器。终点需无指数十进制序列化、极端数值边界和写出后严格自检 |
-| §3、§5.3/5.8 编码与物理行 | writer 输出 CRLF；WRAP 每条索引独占一行，数据行最多 78 字符加 CRLF；宽 35 列有回归 | 严格 reader 尚不拒绝所有 Unicode、控制字符、数据区注释/嵌入空行及超长 wrapped 输入；需位置化诊断，兼容解析与严格模式不得混淆 |
-| 实现资源边界 | 输入 16000000 code units、512 曲线、1000000 行、10000000 单元，防超量分配 | 资源超限是独立的资源诊断，不是标准不合法；完整合规结论必须写明资源范围并用大输入验证 |
+| §3/5.1 编码与标志 | ASCII 32..126、CRLF，最后行允许无终止符；# 只在 A 前；节标志大小写按正文 | no-final-terminator / encoding-tab、lf-not-crlf、data-comment |
+| §3/5.3 节约束 | V 首节、A 末节；V/W/C/A 必须存在；保留节各最多一次；客户节自由保存 | extra-version-lines、optional-other-unstructured / missing-section-*、duplicate-section-*、section-after-ascii |
+| §5.2 头字段 | 首点、点后首空格、末冒号；名称标点、前置空格、任意长度值、带点单位、值内冒号 | legal-mnemonic-punctuation、spaces-before-dot、units-may-contain-dots / header-delimiter-* |
+| §5.3 版本 | VERS=2.0；WRAP=YES/NO；必需字段无单位、无歧义重复 | wrapped、complete-empty-metadata-values / invalid-version、invalid-wrap、duplicate-required-VERS |
+| §5.4 井头完整性 | STRT/STOP/STEP/NULL/COMP/WELL/FLD/LOC/SRVC/DATE；PROV 或 CNTY+STAT+CTRY；UWI 或 API；空文本合法 | regional-identifiers、api-instead-of-uwi / missing-header-*、regional-alternative-missing、identifier-missing |
+| §5.4 索引 | 深度 M/F/FT、可升可降；TIME 声明单位且递增；四处网格单位相同 | depth-unit-F、descending-depth、increasing-time / invalid-depth-unit、descending-time、mismatched-grid-unit |
+| §5.4 精确数值 | BigInt 十进制比较端点、间隔及整除；非零 STEP 无容差；STEP=0 允许不规则单调索引 | equivalent-decimal-scales、irregular-zero-step / off-grid-integer-quotient、step-rounding、endpoint-rounding |
+| §5.5 曲线 | 首列 DEPT/DEPTH/TIME，列顺序和宽度；API 代码为含空格/前导零的不透明字符串；重复名文档合法，Log 转换拒绝 | opaque-codes-spaces-leading-zero、duplicate-curve-document / invalid-depth-name、ragged-row |
+| §5.6/5.7 可选信息 | 参数按头格式；Other/客户文本不解释；重复参数按原序存档 | optional-parameter-values-with-colons、customer-and-duplicate-parameter-document / 坏参数头走 header-delimiter 规则 |
+| §5.8 ASCII | 数值十进制、无指数/NaN/逗号；索引非 NULL 严格单调；不允许空白/注释数据行 | missing-optional-api-code / invalid-number-*、index-null、data-blank、repeated-index |
+| §5.3/5.8 WRAP | 索引独占一行、记录不串行、含前后填充和 CRLF 的物理行≤80；未终止末行按实际宽度 | wrapped-exact80、wrapped-exact80-unterminated / wrapped-too-wide-padding、wrapped-index-not-alone、wrapped-incomplete-record |
+| 标准与模型隔离 | 合法极大/极小数保持原文，转换报 model；不把合法重复名删掉 | large-decimal-model-limit、underflow-model-limit、false-null-model-limit |
 
-## 3. 可复现案例与对应处理
+## 具体处理案例
 
-### A. 合法第三字段：读入、处理、写回
+- `GR.GAPI 07 010 01 00 : gamma` 的 API 代码全程原样保留，包括 select/rename/unit-convert/resample/affine/写出。两测次同名曲线不同非空码时 assemble 拒绝，即使样本策略 PreferLast，也不暗选元数据；先核实来源或显式拆列。
+- `STRT=0.25, STEP=0.5` 的等间距文件：兼容 reader 可以读，严格验证报 §5.4 整除错误，严格写出拒绝，绝不挪动观测深度来伪装修复。
+- 缺 COMP 等文本井头：严格报缺失；`COMP. : company` 的空值合法。该区别避免捏造个人/井场资料。
+- E 指数：兼容数值读入可用；严格输入拒绝。Double 极小数及最大有限数的写出展开为往返等值的普通十进制；WRAP 超行预算则明确拒绝。
+- 重复曲线、重复参数或 Double 无法表达的合法十进制：严格文档检查可通过，原文完全保留；分析转换单独报模型限制。
+- `WELL. SYN:CASE : synthetic well`：值 SYN:CASE，描述 synthetic well；描述内冒号需调用方迁移到值，不能按首冒号悄悄拆错。
 
-`fixtures/las2-api-codes.las` 是自行构造的合成文件，没有真实井数据/联系信息：
+## 预算与无法处理时的保证
 
-```text
-DEPT.M : depth
-GR.GAPI 45 310 01 00 : gamma ray
-SP.MV 07 010 01 00 : spontaneous potential
-```
+源文本最多 16,000,000 个 String 代码单元；最多 1,000,000 物理行、65,536 解析头条目、4,096 曲线；数值 token 最多 1,024 字符；最多返回 256 个诊断。超预算报 `resource`（源接收超限抛 `resource:`），**不是宣称标准禁止更大的合法文件**。未得到空诊断时不得宣称通过。String 保存仅保证其已接收文本，不承诺超过接收预算的归档服务。
 
-预期：GR 代码精确为 `45 310 01 00`，SP 为 `07 010 01 00`；不得转成 Double、丢弃前导零、并入描述或增加数据列。规范代码表的含义不是由本库推断的。
+分析层仍沿用有界有限 Double 和唯一名称要求，不能无损表示任意精度十进制；源文档才是审计原件。Log 的 canonical writer 不保存全部注释/布局；如需完整档案必须用 document_text。客户自由文本中的井深不会随数值单位转换改写。组装仅沿用首测次井头/参数/客户文本，不是多个源文档的无损合并。
+
+## 可复现验收与终点
 
 ```sh
-moon run examples/compliance --target wasm-gc --deny-warn
+moon run examples/strict --target wasm-gc --deny-warn
 moon build --target js --release --deny-warn
-node tools/moonwell.mjs fixtures/las2-api-codes.json
-node tools/test-cli.mjs
+python tools/make-conformance-corpus.py
+python tools/verify-conformance.py
+python tools/differential.py
 python tools/verify-las2.py
 ```
 
-公共 API 示例执行 parse → select/rename/unit-convert → wrapped write → parse，并断言代码未变。根目录回归还验证 resample、affine、两种 WRAP 与空码。`verify-las2.py` 使用独立 lasio 0.32 对照六类合成案例的列名、代码和带冒号井名；这不是官方认证。lasio 0.32 将本案例自由格式客户节当成头字段而拒绝；因此仅在送给独立 oracle 的副本中去掉客户节，MoonWell 输入仍为完整文件，客户节透传由本库测试和输出断言验证，不能声称该部分已获独立 oracle 验证。
+新增独立 Python 结构解析器和 Decimal 检查器，不复用 MoonBit 的合法性判断；在每个案例上比较预期、独立判定和 MoonBit 结果，并逐字验证原文保存。可转模型的正例严格归一化后再次交叉验证；模型受限正例必须给 model 错误。这是**本项目独立语言实现的交叉证据，不是外部认证**。既有 lasio 0.32 oracle 提供 32 个数值案例和 6 个元数据案例；lasio 对自由格式客户节不兼容，元数据 oracle 仅在它的副本中去掉客户节，完整客户节保存由源文档案例验证，不冒称 lasio 通过该部分。
 
-### B. 多测次代码冲突
-
-同名曲线一方为空码、另一方为非空码时，输出保留非空码；两方不同非空码时，`assemble` 报 `conflicting curve API codes`，即使样本策略选择 PreferLast 也不掩盖元数据冲突。调用方应先核实是否同一测量、显式改名拆列或更正来源；本库不自动选码。井头/参数/客户节沿用首测次，单元级样本来源另有 provenance，不能把首测次头解释成所有测次头的无损合并。
-
-### C. 合法特殊元数据
-
-`WELL. SYN:CASE : synthetic well` 的值为 `SYN:CASE`，描述为 `synthetic well`。`GR/RAW+` 合法且不推断曲线别名。`~X` 客户节和 `SOURCE` 版本扩展被保留，禁止其中注入新的保留节；客户内容只透传，单位转换不会自行改写客户文本中的深度数字。
-
-### D. 不能掩盖的未完成案例
-
-- 缺少 COMP 等井头的最小文件，当前可能可读取；这不是标准通过结果。严格终点应给缺失字段诊断。
-- `STRT=0.25, STEP=0.5` 的等间距数据当前可能可读取，但不满足基线的索引/步长整除要求。严格终点应拒绝，不能通过改变 STRT 修复观测值。
-- E 指数当前可兼容读取；标准写出终点应展开为等值十进制或明确无法表示的错误，而不能输出指数后声称严格合规。
-- 合法但超出资源预算、或无法无歧义映射为唯一列名的文件，应保留原文并报告“资源/模型限制”，不得称其格式非法或静默删列。
-
-这些不是本次已修复的内容，保留在矩阵中作为阻断条件。
-
-## 4. 完整标准合规终点（退出门禁）
-
-目标不是“通过本项目自己的几个示例”，而是 **在明确资源范围内，覆盖指定版 LAS 2.0 的全部必须/可选语法及严格写出；合法但不适合分析的输入仍有明确无损接收或转换拒绝路径**。按以下顺序验收，未全部完成不得在 README、申报或版本说明中写“完整合规”：
-
-1. **冻结规范版本**：取得可验证的 CWLS 规范，逐项比对 2014 与后续修订差异；冲突以原文为准。每个规范性条款分配可追踪检查项，不以第三方 reader 宽容行为替代。
-2. **分离文档层与分析层**：独立 LAS 文档模型接收并保存合法条目、重复名称、注释和扩展；明确转换到 Log 时的模型/资源错误。当前只有 Log，尚未完成此层。
-3. **严格验证器与写出器**：实现矩阵所有待办，返回节/行/字段/条款的结构化诊断；十进制精确判断、编码/行宽/完整必需井头、深度/时间规则、无指数序列化；写出结果必须再次通过严格验证。严格模式和兼容模式必须显式区分。
-4. **标准用例覆盖闭环**：每个必须规则至少一个正例、一个反例；每个可选机制至少一个往返例；两种 WRAP、上下行深度、递增时间、空码/多段码、客户节、标点、NULL、区域井号替代和极端数字均纳入。失败不得删除用例或偷偷放宽规则。
-5. **独立交叉验证与可复现发布**：使用 CWLS 示例/独立结构检查器及至少一个独立 reader 作交叉证据；任何差异逐条解释。四目标 CI、真实新消费者和发行包同源检查通过后，才更新状态为完成。独立 reader 接受并不自动等于标准符合。
-
-当前达成的是 API 代码及若干合法输入兼容修复，**不是门禁 1—5 全部完成**。若参赛审核要求当期已实现完整 LAS 2.0，而不接受明确剩余项与验收终点，则本版本仍不能据此声称满足该要求。
+终点已由“以后补完整性检查”改为可执行门禁：明确冻结的规范基线、上述条款全部落地、正反例和严格再验证、独立检查、四目标 CI、精确版本无凭据消费者。发布时必须逐项记录实际结果，不能把计划或单独 parse 成功当证明。未知解释争议、未核验的后续规范及第三方认证不包装为已完成；LAS3/DLIS/LIS、原始二进制/编码修复、地质解释不在本基线内。

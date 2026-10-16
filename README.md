@@ -1,6 +1,6 @@
 # MoonWell
 
-A pure MoonBit library for **LAS 2.0 well-log integrity and provenance-preserving multi-run assembly**. MIT licensed, module `2200732518gjy/moonwell` at 0.2.0.
+A pure MoonBit library for **LAS 2.0 well-log integrity and provenance-preserving multi-run assembly**. MIT licensed, module `2200732518gjy/moonwell` at 0.3.0.
 
 MoonWell serves acquisition QA, research preprocessing, and archival integration. Its central workflow is not just a LAS converter: independent runs are converted to explicit target units, aligned onto a bounded depth grid, and resolved under an explicit conflict policy with **per-cell source indexes and interpolation flags**.
 
@@ -12,7 +12,7 @@ two-step consumer setup:
 ~~~sh
 moon new consumer
 cd consumer
-moon add 2200732518gjy/moonwell@0.2.0
+moon add 2200732518gjy/moonwell@0.3.0
 ~~~
 
 Add to the consumer package manifest:
@@ -62,7 +62,7 @@ node tools/test-cli.mjs
 
 One JSON request file produces one envelope: `{"ok":true,"result":...}` or `{"ok":false,"error":"..."}`. Output files use exclusive creation and **never overwrite**. Exit 0: successful envelope; 1: domain error envelope; 2: adapter/IO failure. The adapter returns error messages, not stack traces.
 
-Commands: `qa`, `normalize`, `csv`, `resample`, `interval`, `assemble`. See [docs/protocol.md](docs/protocol.md) for exact fields. The library, not the file adapter, is the published integration surface.
+Commands: `qa`, `normalize`, `csv`, `resample`, `interval`, `assemble`, `validate-las2`, `archive-las2`, `strict-normalize`. See [docs/protocol.md](docs/protocol.md) for exact fields. The library, not the file adapter, is the published integration surface.
 
 ## Verify
 
@@ -90,8 +90,9 @@ The original v0.1.0 production implementation contains 2042 nonblank, noncomment
 
 ## Scope and cautions
 
-The numerical reader is **not a full LAS2 certifier**. Version 0.2.0 fixes legal curve API-code handling: `Curve.api_code` is an opaque string, preserving spaces and leading zeros during parse/write and transforms. LAS first-dot/first-whitespace/last-colon delimiters, printable punctuation mnemonics, customer sections and version extensions are supported. See the [standards matrix, executable cases and complete-conformance exit gate](docs/las2-conformance.md). Duplicate curve/metadata names remain a numerical-model restriction; arbitrary delimiters, comma decimals, LAS3 and DLIS/LIS are unsupported. Wrapped multi-column records must start with a depth-only line. Nonzero STEP must agree with each actual interval; zero STEP permits irregular depth. Canonical writing uses CRLF, preserves curve codes/customer payloads/version extensions, and bounds wrapped data lines to 80 characters including CRLF. It does not preserve all comments, spacing or section positions. It is not yet certified output (see the matrix). Empty tables are valid in memory but cannot be written to LAS.
+LAS2 conformance is now an explicit path, frozen to **CWLS January 2014**, not a latest-edition or third-party certification claim. Use `read_las_document` + `check_las2` for structured standard/resource diagnostics and `document_text` for exact original text (including comments, duplicate names and layout). Use `parse_strict` / `document_to_log` for validated numerical conversion and `write_las_strict` for revalidated standard output. Legal documents that cannot fit the unique-column finite-Double model raise `model:` instead of being declared illegal or silently losing columns. Strict writing expands exponents, uses exact decimal grid checks, and never fabricates missing well metadata or rounds observations. See the [implemented rules, budgets, examples and conformance gate](docs/las2-conformance.md).
 
+The original `parse` / `write_las` are **compatibility APIs**, not conformance assertions. Canonical writing is not an exact archive. Empty tables are valid in memory but cannot be written to LAS. LAS3, DLIS/LIS, comma decimals and proprietary dialects are outside this release. Arbitrary-precision source decimals are preserved in the document but numerical analysis remains finite Double.
 No curve alias inference, depth-shift optimization, reservoir interpretation, drilling advice, safety decisions, geological inference or thermodynamic model is provided. QA thresholds and units remain the caller's responsibility. Equal-within-tolerance observations retain the earlier source even under PreferLast. Conflict records identify the previous/incoming observations before policy application. Generated depth cells deliberately have no run owner.
 
 Arrays are readable and mutable; constructors snapshot inputs, transformations rebuild validated copies, and report writers revalidate their input. Do not mutate objects concurrently. Use numerical CSV in data pipelines, not as a safe spreadsheet-formula format for untrusted run names.
@@ -110,6 +111,26 @@ node tools/moonwell.mjs fixtures/las2-api-codes.json
 python tools/verify-las2.py  # optional lasio 0.32 metadata oracle
 ~~~
 
-Full-standard compliance is an explicit **open** gate, not an accomplished claim. Remaining work includes strict required-well-header/encoding/index-grid checks and standards-only numeric output. `parse` accepts some nonstandard input for compatibility; successful parsing is not a conformance certificate.
+## 0.3.0 strict document workflows
 
-0.2.0 local verification: 2177 substantive production MoonBit lines; 52/52 tests each on wasm-gc, wasm and JS, all strict checks/release builds, original three workflows plus the public standards workflow, CLI acceptance, 32/32 numerical and 6/6 metadata oracle cases. Native was strictly checked locally; execution remains the Linux CI gate. The metadata oracle excludes opaque customer sections from its lasio input because lasio rejects that free-form payload; project tests verify preservation separately.
+```moonbit
+let document = @well.read_las_document(source)
+let diagnostics = @well.check_las2(document)
+// Empty diagnostics means the declared 2014 baseline passes within budgets.
+let original = @well.document_text(document) // exact source String, never regenerated
+let log = @well.document_to_log(document) // can raise model: for valid documents
+let output = @well.write_las_strict(log, wrapped=true)
+```
+
+The complete [strict public example](examples/strict/main.mbt) covers validation, both WRAP outputs, duplicate-name archival/model rejection and structured missing-header diagnostics. A source capture alone never implies validity. Numeric-model output may not preserve arbitrary decimal spelling: retain the document as the authoritative archive.
+
+```sh
+moon run examples/strict --target wasm-gc --deny-warn
+moon build --target js --release --deny-warn
+python tools/make-conformance-corpus.py
+python tools/verify-conformance.py
+```
+
+The deterministic 105-case corpus has 27 positives and 78 negatives. Independent Python structure/Decimal and MoonBit verdicts agree; all 105 exact archives match; 22 numerical-model positives survive strict normalization and independent revalidation; 5 standard-valid model-limited cases explicitly reject conversion. This cross-check is not CWLS Certify certification. CI runs it alongside the 32 numerical and 6 metadata lasio oracle cases, tests/builds and all public examples on wasm-gc/wasm/js/native. Windows has no local native C compiler, so native execution is verified in Linux CI, not claimed locally.
+
+Local 0.3.0 measurements: **2961** nonblank/noncomment production MoonBit lines (tests, examples, bridge, generated interfaces excluded); **71/71** tests on each of wasm-gc/wasm/js, strict checks, release builds, public workflows and real CLI acceptance passed. Native strict check passed locally; actual native execution is a CI requirement.
