@@ -72,6 +72,12 @@ pub fn parse_number(token : String) -> Double raise WellError {
       0.0
     }
   }
+  if value == 0.0 {
+    let mantissa = token.to_upper().split("E").to_array()[0]
+    if mantissa.iter().any(c => c >= '1' && c <= '9') {
+      fail("number underflows finite range")
+    }
+  }
   if !finite(value) {
     fail("number exceeds finite range")
   }

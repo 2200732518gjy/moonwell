@@ -6,12 +6,12 @@ fn header_line(h : Header) -> String {
 ///|
 fn cell_text(value : Double?, sentinel : Double) -> String raise WellError {
   match value {
-    None => sentinel.to_string()
+    None => las_decimal_text(sentinel)
     Some(v) => {
       if v == sentinel {
         fail("valid sample collides with NULL sentinel")
       }
-      v.to_string()
+      las_decimal_text(v)
     }
   }
 }
@@ -25,17 +25,7 @@ pub fn write_las(log : Log, wrapped? : Bool = false) -> String raise WellError {
   }
   let first = log.rows[0][0].unwrap()
   let last = log.rows[log.rows.length() - 1][0].unwrap()
-  let mut step = 0.0
-  if log.rows.length() > 1 {
-    step = log.rows[1][0].unwrap() - first
-    for i in 2..<log.rows.length() {
-      let delta = log.rows[i][0].unwrap() - log.rows[i - 1][0].unwrap()
-      if (delta - step).abs() > 1.0e-9 * (1.0 + step.abs()) {
-        step = 0.0
-        break
-      }
-    }
-  }
+  let step = serialized_step(log)
   let mut out = "~Version\nVERS. 2.0 : LAS version\nWRAP. " +
     (if wrapped { "YES" } else { "NO" }) +
     " : wrapping\n"
@@ -43,18 +33,23 @@ pub fn write_las(log : Log, wrapped? : Bool = false) -> String raise WellError {
     out += header_line(h)
   }
   out += "~Well\n"
-  for pair in [("STRT", first), ("STOP", last), ("STEP", step)] {
+  for
+    pair in [
+      ("STRT", las_decimal_text(first)),
+      ("STOP", las_decimal_text(last)),
+      ("STEP", step),
+    ] {
     out += header_line({
       name: pair.0,
       unit: log.curves[0].unit,
-      value: pair.1.to_string(),
+      value: pair.1,
       description: "depth grid",
     })
   }
   out += header_line({
     name: "NULL",
     unit: "",
-    value: log.null_value.to_string(),
+    value: las_decimal_text(log.null_value),
     description: "missing value",
   })
   for h in log.headers {

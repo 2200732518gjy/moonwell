@@ -12,6 +12,8 @@ pub fn assemble(Array[Log], Array[String], Array[Double], Double, ConflictPolicy
 
 pub fn assembly_report(Assembly) -> Json raise WellError
 
+pub fn check_las2(LasDocument) -> Array[LasDiagnostic]
+
 pub fn convert_curve(Log, String, String) -> Log raise WellError
 
 pub fn convert_value(Double, String, String) -> Double raise WellError
@@ -24,6 +26,12 @@ pub fn depths(Log) -> Array[Double] raise WellError
 
 pub fn dispatch(Json) -> Json raise WellError
 
+pub fn document_entries(LasDocument) -> Array[LasEntry] raise WellError
+
+pub fn document_text(LasDocument) -> String
+
+pub fn document_to_log(LasDocument) -> Log raise WellError
+
 pub fn execute(String) -> String
 
 pub fn fill_constant(Log, String, Double) -> Log raise WellError
@@ -33,6 +41,10 @@ pub fn fill_linear(Log, String, Double) -> Log raise WellError
 pub fn gradient_curve(Log, String, String, Double) -> Log raise WellError
 
 pub fn interval_report(IntervalSummary) -> Json
+
+pub fn las2_report(LasDocument) -> Json
+
+pub fn las_decimal_text(Double) -> String raise WellError
 
 pub fn make_log(Array[Curve], Array[Array[Double?]], headers? : Array[Header], parameters? : Array[Header], other? : Array[String], null_value? : Double, version_headers? : Array[Header], extra_sections? : Array[LasSection]) -> Log raise WellError
 
@@ -48,6 +60,8 @@ pub fn parse_header(String) -> Header raise WellError
 
 pub fn parse_number(String) -> Double raise WellError
 
+pub fn parse_strict(String) -> Log raise WellError
+
 pub fn provenance_csv(Assembly) -> String raise WellError
 
 pub fn quality_check(Log, Array[QcRule], Double) -> Array[Issue] raise WellError
@@ -57,6 +71,8 @@ pub fn quality_report(Log, Array[QcRule], Double) -> Json raise WellError
 pub fn quantile(Log, String, Double) -> Double? raise WellError
 
 pub fn read_header(String) -> LasHeader raise WellError
+
+pub fn read_las_document(String) -> LasDocument raise WellError
 
 pub fn read_report(String) -> Json raise WellError
 
@@ -83,6 +99,8 @@ pub fn window(Log, Double, Double) -> Log raise WellError
 pub fn write_csv(Log, include_units? : Bool) -> String raise WellError
 
 pub fn write_las(Log, wrapped? : Bool) -> String raise WellError
+
+pub fn write_las_strict(Log, wrapped? : Bool) -> String raise WellError
 
 // Errors
 pub(all) suberror WellError {
@@ -153,6 +171,25 @@ pub struct Issue {
   row : Int
   depth : Double
   message : String
+}
+
+pub(all) struct LasDiagnostic {
+  kind : String
+  clause : String
+  section : String
+  line : Int
+  field : String
+  message : String
+}
+
+pub struct LasDocument {
+  source : String
+}
+
+pub(all) struct LasEntry {
+  section : String
+  line : Int
+  header : Header
 }
 
 pub struct LasHeader {

@@ -84,6 +84,26 @@ fn check_fields(
 pub fn dispatch(request : Json) -> Json raise WellError {
   let command = string_field(request, "command")
   match command {
+    "validate-las2" => {
+      check_fields(request, ["command", "las"])
+      las2_report(read_las_document(string_field(request, "las")))
+    }
+    "strict-normalize" => {
+      check_fields(request, ["command", "las"])
+      Json::object({
+        "las": Json::string(
+          write_las_strict(parse_strict(string_field(request, "las"))),
+        ),
+      })
+    }
+    "archive-las2" => {
+      check_fields(request, ["command", "las"])
+      let document = read_las_document(string_field(request, "las"))
+      Json::object({
+        "las": Json::string(document_text(document)),
+        "validation": las2_report(document),
+      })
+    }
     "qa" => {
       check_fields(request, ["command", "las", "max_gap"])
       quality_report(
