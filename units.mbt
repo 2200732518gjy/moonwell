@@ -61,7 +61,12 @@ pub fn convert_curve(
   let old = log.curves[column]
   ignore(convert_value(0.0, old.unit, unit))
   let curves = log.curves.copy()
-  curves[column] = { name: old.name, unit, description: old.description, }
+  curves[column] = {
+    name: old.name,
+    unit,
+    description: old.description,
+    api_code: old.api_code,
+  }
   let rows : Array[Array[Double?]] = []
   for original in log.rows {
     let row = original.copy()
@@ -91,5 +96,7 @@ pub fn convert_curve(
     parameters=log.parameters,
     other=log.other,
     null_value=log.null_value,
+    version_headers=log.version_headers,
+    extra_sections=log.extra_sections,
   )
 }

@@ -10,6 +10,8 @@ pub struct LasHeader {
   well : Array[Header]
   parameters : Array[Header]
   other : Array[String]
+  version_headers : Array[Header]
+  extra_sections : Array[LasSection]
   data : Array[DataLine]
   wrapped : Bool
   null_value : Double
@@ -51,6 +53,7 @@ pub fn read_header(text : String) -> LasHeader raise WellError {
   let curves : Array[Curve] = []
   let other : Array[String] = []
   let data : Array[DataLine] = []
+  let extras : Array[LasSection] = []
   let seen : Array[String] = []
   let mut section = ""
   let mut number = 0
@@ -75,21 +78,30 @@ pub fn read_header(text : String) -> LasHeader raise WellError {
       } else if tag.has_prefix("~A") {
         "A"
       } else {
-        fail("unsupported section at line " + number.to_string())
-        ""
+        "X"
       }
       if section == "A" {
         fail("sections after ASCII are unsupported")
       }
-      if seen.contains(next) {
+      if seen.length() == 0 && next != "V" {
+        fail("Version must be the first section")
+      }
+      if next != "X" && seen.contains(next) {
         fail("duplicate section: " + next)
       }
       if next == "A" &&
         (!seen.contains("V") || !seen.contains("W") || !seen.contains("C")) {
         fail("Version, Well and Curve sections must precede ASCII")
       }
+      if next == "X" {
+        extras.push({ title: line, lines: [], })
+      }
       seen.push(next)
       section = next
+      continue
+    }
+    if section == "X" {
+      extras[extras.length() - 1].lines.push(raw.trim_end().to_owned())
       continue
     }
     if line.has_prefix("#") {
@@ -117,10 +129,12 @@ pub fn read_header(text : String) -> LasHeader raise WellError {
       "W" => insert_header(well, h)
       "P" => insert_header(parameters, h)
       "C" => {
-        if h.value != "" {
-          fail("curve line may not contain a value")
-        }
-        curves.push({ name: h.name, unit: h.unit, description: h.description, })
+        curves.push({
+          name: h.name,
+          unit: h.unit,
+          description: h.description,
+          api_code: h.value,
+        })
         if curves.length() > 512 {
           fail("curve limit is 512")
         }
@@ -151,6 +165,11 @@ pub fn read_header(text : String) -> LasHeader raise WellError {
   let null_value = parse_number(header_value(well, "NULL").value)
   LasHeader::{
     curves,
+    version_headers: version.filter(h => {
+      let key = canonical(h.name)
+      key != "VERS" && key != "WRAP"
+    }),
+    extra_sections: extras,
     well,
     parameters,
     other,

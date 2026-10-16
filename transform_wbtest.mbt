@@ -6,7 +6,7 @@ test "explicit transformations retain nulls and independent storage" {
   assert_eq(rename_curve(log, "GR", "GAMMA").curves[1].name, "GAMMA")
   let derived = append_curve(
     log,
-    { name: "FLAG", unit: "", description: "quality flag", },
+    { name: "FLAG", unit: "", description: "quality flag", api_code: "", },
     [Some(0.0), Some(1.0), Some(0.0)],
   )
   assert_eq(derived.rows[1][2], Some(1.0))
@@ -20,7 +20,11 @@ test "transformations reject ambiguous metadata and unsafe depth changes" {
   assert_true(rejected(() => mask_range(fixture(), "DEPT", 0.0, 1.0)))
   assert_true(
     rejected(() => {
-      append_curve(fixture(), { name: "X", unit: "", description: "", }, [])
+      append_curve(
+        fixture(),
+        { name: "X", unit: "", description: "", api_code: "", },
+        [],
+      )
     }),
   )
 }

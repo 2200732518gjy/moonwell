@@ -1,10 +1,10 @@
 ///|
-test "metadata roundtrip injection and duplicate mnemonics are rejected" {
+test "header values may contain colons but not newlines or duplicate mnemonics" {
   let c = fixture().curves
   let bad = Header::{
     name: "WELL",
     unit: "",
-    value: "abc : injected",
+    value: "abc\ninjected",
     description: "",
   }
   assert_true(rejected(() => make_log(c, [], headers=[bad])))

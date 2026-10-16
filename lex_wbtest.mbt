@@ -15,12 +15,12 @@ test "decimal grammar, exponent and overflow boundaries" {
 }
 
 ///|
-test "metadata preserves units and colons in description" {
+test "LAS last-colon delimiter permits colons inside data" {
   let h = parse_header("GR.GAPI : gamma: ray")
   assert_eq(h.name, "GR")
   assert_eq(h.unit, "GAPI")
-  assert_eq(h.value, "")
-  assert_eq(h.description, "gamma: ray")
+  assert_eq(h.value, ": gamma")
+  assert_eq(h.description, "ray")
   assert_eq(parse_header("NULL. -999.25 : sentinel").value, "-999.25")
   assert_eq(words(" 1\t2\r\n3 "), ["1", "2", "3"])
 }

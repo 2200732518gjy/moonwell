@@ -13,6 +13,7 @@ pub fn rename_curve(
     name: replacement,
     unit: old.unit,
     description: old.description,
+    api_code: old.api_code,
   }
   rebuild(log, curves, log.rows)
 }

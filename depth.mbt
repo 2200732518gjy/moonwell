@@ -11,6 +11,8 @@ fn rebuild(
     parameters=log.parameters,
     other=log.other,
     null_value=log.null_value,
+    version_headers=log.version_headers,
+    extra_sections=log.extra_sections,
   )
 }
 

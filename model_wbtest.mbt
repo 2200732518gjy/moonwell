@@ -2,8 +2,8 @@
 fn fixture() -> Log raise WellError {
   make_log(
     [
-      { name: "DEPT", unit: "M", description: "depth", },
-      { name: "GR", unit: "GAPI", description: "gamma", },
+      { name: "DEPT", unit: "M", description: "depth", api_code: "", },
+      { name: "GR", unit: "GAPI", description: "gamma", api_code: "", },
     ],
     [[Some(0.0), Some(10.0)], [Some(1.0), None], [Some(2.0), Some(30.0)]],
   )

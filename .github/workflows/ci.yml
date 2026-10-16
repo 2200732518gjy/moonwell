@@ -39,6 +39,7 @@ jobs:
           moon test --target ${{ matrix.target }} --deny-warn
           moon build --target ${{ matrix.target }} --release --deny-warn
           moon run examples --target ${{ matrix.target }} --deny-warn
+          moon run examples/compliance --target ${{ matrix.target }} --deny-warn
       - name: Real CLI acceptance
         if: matrix.target == 'js'
         run: node tools/test-cli.mjs

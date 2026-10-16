@@ -97,6 +97,7 @@ pub fn gradient_curve(
       name: output_name,
       unit: log.curves[column].unit + "/" + log.curves[0].unit,
       description: "backward adjacent gradient of " + name,
+      api_code: "",
     },
     values,
   )

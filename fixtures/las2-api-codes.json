@@ -1,0 +1,4 @@
+{
+  "command": "normalize",
+  "las": "~Version Information\nVERS. 2.0 : LAS version\nWRAP. NO : one line per index\nSOURCE. SYNTHETIC : producer\n~Well Information\nSTRT.M 0 : first index\nSTOP.M 2 : last index\nSTEP.M 1 : index increment\nNULL. -999.25 : missing\nCOMP. SYNTHETIC : company\nWELL. SYN:CASE : synthetic well\nFLD. TEST : field\nLOC. LAB : location\nPROV. TEST : province\nSRVC. SYNTHETIC : service\nDATE. 2026 10 16 : date\nUWI. SYNTHETIC0000000 : identifier\n~Curve Information\nDEPT.M : depth\nGR.GAPI 45 310 01 00 : gamma ray\nSP.MV 07 010 01 00 : spontaneous potential\n~Parameter\nRUN/ID. SYN:01 : run identifier\n~X Synthetic customer section\n# opaque comment\nvendor-key=synthetic\n~ASCII\n0 10 1\n1 -999.25 2\n2 30 3\n"
+}

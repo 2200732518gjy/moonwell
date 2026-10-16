@@ -78,8 +78,22 @@ pub fn assemble(
     for c in 1..<log.curves.length() {
       let incoming = log.curves[c]
       let mut found = false
-      for target in curves {
+      for j in 0..<curves.length() {
+        let target = curves[j]
         if canonical(target.name) == canonical(incoming.name) {
+          if target.api_code != "" &&
+            incoming.api_code != "" &&
+            target.api_code != incoming.api_code {
+            fail("conflicting curve API codes: " + target.name)
+          }
+          if target.api_code == "" && incoming.api_code != "" {
+            curves[j] = {
+              name: target.name,
+              unit: target.unit,
+              description: target.description,
+              api_code: incoming.api_code,
+            }
+          }
           found = true
           break
         }
@@ -133,6 +147,7 @@ pub fn assemble(
             name: incoming.name,
             unit: target.unit,
             description: incoming.description,
+            api_code: incoming.api_code,
           }
           break
         }

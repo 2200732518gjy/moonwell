@@ -6,6 +6,14 @@ import path from 'node:path';
 const dir = mkdtempSync(path.join(tmpdir(), 'moonwell-cli-'));
 const run = (...args) => spawnSync(process.execPath, ['tools/moonwell.mjs', ...args], { encoding: 'utf8' });
 try {
+  const standard = run('fixtures/las2-api-codes.json');
+  assert.equal(standard.status, 0, standard.stderr);
+  const las = JSON.parse(standard.stdout).result.las;
+  assert.match(las, /GR\.GAPI 45 310 01 00 : gamma ray/);
+  assert.match(las, /SP\.MV 07 010 01 00 : spontaneous potential/);
+  assert.match(las, /WELL\. SYN:CASE : synthetic well/);
+  assert.match(las, /~X Synthetic customer section/);
+  assert.match(las, /SOURCE\. SYNTHETIC : producer/);
   const qa = run('fixtures/qa.json');
   assert.equal(qa.status, 0, qa.stderr);
   assert.equal(JSON.parse(qa.stdout).result.schema, 'moonwell.qa/v1');

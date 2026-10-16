@@ -79,9 +79,9 @@ pub fn parse_number(token : String) -> Double raise WellError {
 }
 
 ///|
-/// Parse mnemonic.unit value : description. The first colon separates description.
+/// Parse mnemonic.unit value : description. The last colon separates description (CWLS 2014 section 5.2).
 pub fn parse_header(line : String) -> Header raise WellError {
-  let (body, description) = match line.split_once(":") {
+  let (body, description) = match line.rev_split_once(":") {
     Some((a, b)) => (a.to_owned(), b.trim().to_owned())
     None => {
       fail("header requires ':' delimiter")
@@ -102,6 +102,9 @@ pub fn parse_header(line : String) -> Header raise WellError {
   let mut end_unit = 0
   while end_unit < chars.length() && !whitespace(chars[end_unit]) {
     end_unit += 1
+  }
+  if end_unit == chars.length() {
+    fail("header requires space delimiter after unit")
   }
   let unit_buffer = StringBuilder()
   let value_buffer = StringBuilder()

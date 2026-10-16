@@ -34,7 +34,7 @@ pub fn gradient_curve(Log, String, String, Double) -> Log raise WellError
 
 pub fn interval_report(IntervalSummary) -> Json
 
-pub fn make_log(Array[Curve], Array[Array[Double?]], headers? : Array[Header], parameters? : Array[Header], other? : Array[String], null_value? : Double) -> Log raise WellError
+pub fn make_log(Array[Curve], Array[Array[Double?]], headers? : Array[Header], parameters? : Array[Header], other? : Array[String], null_value? : Double, version_headers? : Array[Header], extra_sections? : Array[LasSection]) -> Log raise WellError
 
 pub fn mask_range(Log, String, Double, Double) -> Log raise WellError
 
@@ -119,6 +119,7 @@ pub(all) enum ConflictPolicy {
 }
 
 pub(all) struct Curve {
+  api_code : String
   name : String
   unit : String
   description : String
@@ -159,9 +160,16 @@ pub struct LasHeader {
   well : Array[Header]
   parameters : Array[Header]
   other : Array[String]
+  version_headers : Array[Header]
+  extra_sections : Array[LasSection]
   data : Array[DataLine]
   wrapped : Bool
   null_value : Double
+}
+
+pub(all) struct LasSection {
+  title : String
+  lines : Array[String]
 }
 
 pub struct Log {
@@ -170,6 +178,8 @@ pub struct Log {
   headers : Array[Header]
   parameters : Array[Header]
   other : Array[String]
+  version_headers : Array[Header]
+  extra_sections : Array[LasSection]
   null_value : Double
 }
 

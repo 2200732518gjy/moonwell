@@ -6,6 +6,7 @@ pub(all) suberror WellError {
 
 ///|
 pub(all) struct Curve {
+  api_code : String
   name : String
   unit : String
   description : String
@@ -20,6 +21,13 @@ pub(all) struct Header {
 }
 
 ///|
+/// An uninterpreted customer section. Title includes the leading tilde.
+pub(all) struct LasSection {
+  title : String
+  lines : Array[String]
+}
+
+///|
 /// A rectangular table; column zero is non-null strictly monotonic depth.
 /// Arrays are owned snapshots at construction. Call validate after external mutation.
 pub struct Log {
@@ -28,6 +36,8 @@ pub struct Log {
   headers : Array[Header]
   parameters : Array[Header]
   other : Array[String]
+  version_headers : Array[Header]
+  extra_sections : Array[LasSection]
   null_value : Double
 }
 
@@ -52,18 +62,14 @@ fn safe_text(text : String) -> Bool {
 }
 
 ///|
-/// LAS mnemonics are deliberately restricted to ASCII identifiers without delimiters.
+/// LAS 2.0 section 5.2: printable ASCII except internal spaces, dots and colons.
 fn valid_name(name : String) -> Bool {
-  if name.length() == 0 {
+  if name.length() == 0 || name.has_prefix("#") || name.has_prefix("~") {
     return false
   }
   for c in name.iter() {
     let n = c.to_int()
-    if !((n >= 65 && n <= 90) ||
-      (n >= 97 && n <= 122) ||
-      (n >= 48 && n <= 57) ||
-      c == '_' ||
-      c == '-') {
+    if n < 33 || n > 126 || c == '.' || c == ':' {
       return false
     }
   }
@@ -78,6 +84,8 @@ pub fn make_log(
   parameters? : Array[Header] = [],
   other? : Array[String] = [],
   null_value? : Double = -999.25,
+  version_headers? : Array[Header] = [],
+  extra_sections? : Array[LasSection] = [],
 ) -> Log raise WellError {
   let log = Log::{
     curves: curves.copy(),
@@ -85,6 +93,11 @@ pub fn make_log(
     headers: headers.copy(),
     parameters: parameters.copy(),
     other: other.copy(),
+    version_headers: version_headers.copy(),
+    extra_sections: extra_sections.map(s => {
+      title: s.title,
+      lines: s.lines.copy(),
+    }),
     null_value,
   }
   validate(log)
@@ -118,7 +131,11 @@ pub fn validate(log : Log) -> Unit raise WellError {
       c.unit.contains(" ") ||
       c.unit.contains("\t") ||
       c.unit.contains(":") ||
-      !safe_text(c.description) {
+      !safe_text(c.description) ||
+      c.description.contains(":") ||
+      !safe_text(c.api_code) ||
+      c.api_code.trim().to_owned() != c.api_code ||
+      c.api_code.iter().any(c => c.to_int() < 32 || c.to_int() > 126) {
       fail("unsafe curve metadata: " + c.name)
     }
     for j in 0..<i {
@@ -162,24 +179,52 @@ pub fn validate(log : Log) -> Unit raise WellError {
   for h in log.parameters {
     all_headers.push(h)
   }
+  for h in log.version_headers {
+    let key = canonical(h.name)
+    if key == "VERS" || key == "WRAP" {
+      fail("version extensions cannot override VERS or WRAP")
+    }
+    all_headers.push(h)
+  }
   for h in all_headers {
     if !valid_name(h.name) ||
       !safe_text(h.value) ||
-      h.value.contains(":") ||
       !safe_text(h.unit) ||
       h.unit.contains(" ") ||
       h.unit.contains("\t") ||
       h.unit.contains(":") ||
-      !safe_text(h.description) {
+      !safe_text(h.description) ||
+      h.description.contains(":") {
       fail("unsafe header: " + h.name)
     }
   }
-  for collection in [log.headers, log.parameters] {
+  for collection in [log.headers, log.parameters, log.version_headers] {
     for i in 0..<collection.length() {
       for j in 0..<i {
         if canonical(collection[i].name) == canonical(collection[j].name) {
           fail("duplicate metadata mnemonic")
         }
+      }
+    }
+  }
+  for section in log.extra_sections {
+    if !safe_text(section.title) ||
+      !section.title.has_prefix("~") ||
+      section.title.length() < 2 {
+      fail("invalid customer section title")
+    }
+    let tag = canonical(section.title).iter().to_array()[1]
+    if tag == 'V' ||
+      tag == 'W' ||
+      tag == 'C' ||
+      tag == 'P' ||
+      tag == 'O' ||
+      tag == 'A' {
+      fail("customer section cannot impersonate a reserved section")
+    }
+    for line in section.lines {
+      if !safe_text(line) || line.trim().has_prefix("~") {
+        fail("unsafe customer section line")
       }
     }
   }

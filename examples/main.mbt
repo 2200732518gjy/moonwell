@@ -3,8 +3,8 @@
 fn main {
   try {
     let curves : Array[@well.Curve] = [
-      { name: "DEPT", unit: "M", description: "depth", },
-      { name: "GR", unit: "GAPI", description: "gamma ray", },
+      { name: "DEPT", unit: "M", description: "depth", api_code: "", },
+      { name: "GR", unit: "GAPI", description: "gamma ray", api_code: "", },
     ]
     let acquisition = @well.make_log(curves, [
       [Some(0.0), Some(10.0)],

@@ -60,6 +60,8 @@ pub fn parse(text : String) -> Log raise WellError {
     parameters=h.parameters,
     other=h.other,
     null_value=h.null_value,
+    version_headers=h.version_headers,
+    extra_sections=h.extra_sections,
   )
   if rows.length() > 0 {
     let start = parse_number(header_value(h.well, "STRT").value)

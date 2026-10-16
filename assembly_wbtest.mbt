@@ -29,15 +29,15 @@ test "assembly reports conflicts and cell-level source decisions" {
 test "assembly aligns feet depth and converts shared curve units" {
   let a = make_log(
     [
-      { name: "DEPT", unit: "M", description: "", },
-      { name: "SP", unit: "V", description: "", },
+      { name: "DEPT", unit: "M", description: "", api_code: "", },
+      { name: "SP", unit: "V", description: "", api_code: "", },
     ],
     [[Some(0.0), Some(1.0)], [Some(3.048), None]],
   )
   let b = make_log(
     [
-      { name: "DEPTH", unit: "FT", description: "", },
-      { name: "sp", unit: "MV", description: "", },
+      { name: "DEPTH", unit: "FT", description: "", api_code: "", },
+      { name: "sp", unit: "MV", description: "", api_code: "", },
     ],
     [[Some(0.0), Some(1000.0)], [Some(10.0), Some(2000.0)]],
   )
