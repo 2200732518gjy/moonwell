@@ -54,3 +54,30 @@ test "assembly aligns feet depth and converts shared curve units" {
     },
   )
 }
+
+///|
+test "assembly preserves equivalent density aliases and provenance at finite extremes" {
+  let a = make_log(
+    [
+      { name: "DEPT", unit: "M", description: "depth", api_code: "", },
+      { name: "RHOB", unit: "G/CC", description: "density", api_code: "42", },
+    ],
+    [[Some(0.0), None], [Some(1.0), None]],
+  )
+  let b = make_log(
+    [
+      { name: "DEPT", unit: "METER", description: "depth", api_code: "", },
+      { name: "RHOB", unit: "G/CM3", description: "density", api_code: "42", },
+    ],
+    [[Some(0.0), Some(1.0e308)], [Some(1.0), Some(5.0e-324)]],
+  )
+  let merged = assemble([a, b], ["target", "incoming"], [0.0, 1.0], 1.0, Reject)
+  assert_eq(merged.log.rows[0][1], Some(1.0e308))
+  assert_eq(merged.log.rows[1][1], Some(5.0e-324))
+  assert_eq(merged.log.curves[1].unit, "G/CC")
+  assert_eq(merged.sources[0][1].unwrap().run, 1)
+  assert_true(!merged.sources[0][1].unwrap().interpolated)
+  assert_eq(merged.conflicts.length(), 0)
+  assert_eq(a.rows[0][1], None)
+  assert_eq(b.curves[1].unit, "G/CM3")
+}

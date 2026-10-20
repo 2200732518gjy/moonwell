@@ -37,6 +37,10 @@ pub fn convert_value(
       if a.0 != b.0 {
         fail("incompatible unit dimensions: " + from + " -> " + to)
       }
+      // Equivalent aliases must not lose range or precision via the base unit.
+      if a.1 == b.1 && a.2 == b.2 {
+        return value
+      }
       (value * a.1 + a.2 - b.2) / b.1
     }
     _ => {

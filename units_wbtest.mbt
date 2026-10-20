@@ -31,3 +31,31 @@ test "curve conversions preserve nulls and produce roundtrippable headers" {
   assert_eq(feet.rows[1][1], None)
   assert_eq(parse(write_las(feet)).curves[0].unit, "FT")
 }
+
+///|
+test "equivalent unit aliases preserve every finite value without intermediate scaling" {
+  for
+    (from, to) in [
+      ("G/CC", "G/CM3"),
+      ("G/CM3", "G/CC"),
+      ("FT", "FEET"),
+      ("METRE", "METER"),
+    ] {
+    for value in [1.0e308, -1.0e308, 5.0e-324, -5.0e-324, 0.0] {
+      assert_eq(convert_value(value, from, to), value)
+    }
+  }
+  let log = make_log(
+    [
+      { name: "DEPT", unit: "M", description: "depth", api_code: "", },
+      { name: "RHOB", unit: "G/CC", description: "density", api_code: "42", },
+    ],
+    [[Some(0.0), Some(1.0e308)], [Some(1.0), None]],
+  )
+  let converted = convert_curve(log, "RHOB", "G/CM3")
+  assert_eq(converted.rows[0][1], Some(1.0e308))
+  assert_eq(converted.rows[1][1], None)
+  assert_eq(converted.curves[1].api_code, "42")
+  assert_eq(log.curves[1].unit, "G/CC")
+  assert_eq(log.rows[0][1], Some(1.0e308))
+}

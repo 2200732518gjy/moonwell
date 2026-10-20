@@ -86,7 +86,7 @@ pub fn depth_grid(
     fail("grid limit must be 1..1000000")
   }
   let span = stop - start
-  if !finite(span) || span / step > (limit - 1).to_double() {
+  if !finite(span) || span / step >= limit.to_double() {
     fail("grid exceeds sample budget")
   }
   let grid : Array[Double] = []

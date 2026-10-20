@@ -36,3 +36,21 @@ test "grid budgets and floating precision are enforced" {
 test "singleton grid is valid at large finite offsets" {
   assert_eq(depth_grid(1.0e20, 1.0e20, 0.1), [1.0e20])
 }
+
+///|
+test "grid budget counts generated samples not fractional endpoint" {
+  assert_eq(depth_grid(0.0, 9.5, 1.0, limit=10), [
+    0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0,
+  ])
+  assert_eq(depth_grid(0.0, 0.5, 1.0, limit=1), [0.0])
+  assert_eq(depth_grid(0.0, 0.25, 0.1, limit=3).length(), 3)
+  assert_eq(depth_grid(0.0, 99999.5, 1.0).length(), 100000)
+  assert_true(
+    try {
+      ignore(depth_grid(0.0, 10.0, 1.0, limit=10))
+      false
+    } catch {
+      WellError(_) => true
+    },
+  )
+}

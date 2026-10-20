@@ -1,6 +1,8 @@
 # MoonWell
 
-A pure MoonBit library for **LAS 2.0 well-log integrity and provenance-preserving multi-run assembly**. MIT licensed, module `2200732518gjy/moonwell` at 0.3.0.
+[English](README.md) | [简体中文](README.zh-CN.md)
+
+A pure MoonBit library for **LAS 2.0 well-log integrity and provenance-preserving multi-run assembly**. MIT licensed, module `2200732518gjy/moonwell` at 0.3.1.
 
 MoonWell serves acquisition QA, research preprocessing, and archival integration. Its central workflow is not just a LAS converter: independent runs are converted to explicit target units, aligned onto a bounded depth grid, and resolved under an explicit conflict policy with **per-cell source indexes and interpolation flags**.
 
@@ -12,7 +14,7 @@ two-step consumer setup:
 ~~~sh
 moon new consumer
 cd consumer
-moon add 2200732518gjy/moonwell@0.3.0
+moon add 2200732518gjy/moonwell@0.3.1
 ~~~
 
 Add to the consumer package manifest:
@@ -111,7 +113,7 @@ node tools/moonwell.mjs fixtures/las2-api-codes.json
 python tools/verify-las2.py  # optional lasio 0.32 metadata oracle
 ~~~
 
-## 0.3.0 strict document workflows
+## 0.3.1 strict document workflows
 
 ```moonbit
 let document = @well.read_las_document(source)
@@ -133,4 +135,4 @@ python tools/verify-conformance.py
 
 The deterministic 105-case corpus has 27 positives and 78 negatives. Independent Python structure/Decimal and MoonBit verdicts agree; all 105 exact archives match; 22 numerical-model positives survive strict normalization and independent revalidation; 5 standard-valid model-limited cases explicitly reject conversion. This cross-check is not CWLS Certify certification. CI runs it alongside the 32 numerical and 6 metadata lasio oracle cases, tests/builds and all public examples on wasm-gc/wasm/js/native. Windows has no local native C compiler, so native execution is verified in Linux CI, not claimed locally.
 
-Local 0.3.0 measurements: **2961** nonblank/noncomment production MoonBit lines (tests, examples, bridge, generated interfaces excluded); **71/71** tests on each of wasm-gc/wasm/js, strict checks, release builds, public workflows and real CLI acceptance passed. Native strict check passed locally; actual native execution is a CI requirement.
+Local 0.3.1 measurements: **2964** nonblank/noncomment production MoonBit lines (tests, examples, bridge, generated interfaces excluded); **74/74** tests on each of wasm-gc/wasm/js, strict checks, release builds, public workflows and real CLI acceptance passed. Native strict check passed locally; actual native execution is a CI requirement.

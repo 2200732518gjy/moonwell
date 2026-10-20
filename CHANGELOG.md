@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1 — 2026-10-20
+
+- Add a complete, executable Chinese README and reciprocal documentation links.
+- Accept bounded non-endpoint depth grids when the actual sample count fits the limit; retain rejection of genuinely oversized grids.
+- Preserve finite values exactly when converting equivalent unit aliases, avoiding unnecessary base-unit overflow or precision loss. Cover direct conversion, owned curve snapshots, and multi-run provenance with regression tests.
+
 ## 0.3.0 — 2026-10-16
 
 - Add immutable source-document archival, ordered duplicate entries and structured standard/resource diagnostics, explicitly separate from finite-Double numerical-model errors.
