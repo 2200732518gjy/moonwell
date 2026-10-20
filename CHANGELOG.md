@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.2 — 2026-10-20
+
+- Preserve finite adjacent gradients when sample or depth differences overflow, avoiding false-positive and missed QC gradient findings. Retain signed acquisition order, gap/null behavior and true-overflow rejection.
+- Keep tolerant LAS endpoint consistency checks effective for very large finite depths by scaling magnitudes before summation. Strict exact-decimal validation is unchanged.
+- Add regression coverage for both depth directions, gradient signs, equal thresholds, wrapped/unwrapped tolerant input and owned outputs. No public API or dependency changes.
+
 ## 0.3.1 — 2026-10-20
 
 - Add a complete, executable Chinese README and reciprocal documentation links.

@@ -2,7 +2,7 @@
 
 [简体中文](README.zh-CN.md) | [English](README.md)
 
-**面向 LAS 2.0 测井数据完整性和多测次整合的纯 MoonBit 工具库。** 本版本模块为 `2200732518gjy/moonwell@0.3.1`，MIT 许可。
+**面向 LAS 2.0 测井数据完整性和多测次整合的纯 MoonBit 工具库。** 本版本模块为 `2200732518gjy/moonwell@0.3.2`，MIT 许可。
 
 适用于采集质检、研究预处理和归档整合系统。区别于单纯格式转换，MoonWell 把明确的单位转换、受限深度对齐、冲突策略和**逐单元来源**串成可复用工作流；不替代地质解释或安全决策。
 
@@ -30,7 +30,7 @@
 ```sh
 moon new consumer --user local --name consumer
 cd consumer
-moon add 2200732518gjy/moonwell@0.3.1
+moon add 2200732518gjy/moonwell@0.3.2
 ```
 
 把消费者根 `moon.pkg` 内容设为：

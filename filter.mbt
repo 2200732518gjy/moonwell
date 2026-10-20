@@ -1,4 +1,23 @@
 ///|
+// Preserve ratios whose differences overflow even though their quotient is finite.
+// Halving both differences keeps the ratio unchanged; use the ordinary path
+// otherwise to avoid losing small increments to underflow.
+fn adjacent_gradient(
+  a : Double,
+  b : Double,
+  da : Double,
+  db : Double,
+) -> Double {
+  let difference = b - a
+  let delta = db - da
+  if finite(difference) && finite(delta) {
+    difference / delta
+  } else {
+    (0.5 * b - 0.5 * a) / (0.5 * db - 0.5 * da)
+  }
+}
+
+///|
 /// Median neighborhood in row space, stopping at depth gaps and null samples.
 /// Missing centers remain missing; edge neighborhoods are clipped, not padded.
 pub fn median_filter(
@@ -82,7 +101,12 @@ pub fn gradient_curve(
     }
     match (log.rows[i - 1][column], log.rows[i][column]) {
       (Some(a), Some(b)) => {
-        let value = (b - a) / delta
+        let value = adjacent_gradient(
+          a,
+          b,
+          log.rows[i - 1][0].unwrap(),
+          log.rows[i][0].unwrap(),
+        )
         if !finite(value) {
           fail("gradient overflow")
         }

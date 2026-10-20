@@ -80,8 +80,13 @@ pub fn quality_check(
           if previous is Some(p) {
             run = if p == v { run + 1 } else { 1 }
             if rule.max_gradient is Some(g) && i > 0 {
-              let delta = (depth - log.rows[i - 1][0].unwrap()).abs()
-              if (v - p).abs() / delta > g {
+              let gradient = adjacent_gradient(
+                p,
+                v,
+                log.rows[i - 1][0].unwrap(),
+                depth,
+              )
+              if gradient.abs() > g {
                 codes.push("GRADIENT")
               }
             }

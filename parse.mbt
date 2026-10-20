@@ -77,7 +77,8 @@ pub fn parse(text : String) -> Log raise WellError {
     let stop = parse_number(header_value(h.well, "STOP").value)
     let first = rows[0][0].unwrap()
     let last = rows[rows.length() - 1][0].unwrap()
-    let tolerance = 1.0e-8 * (1.0 + first.abs() + last.abs())
+    // Scale before summing so finite endpoint magnitudes cannot disable checks.
+    let tolerance = 1.0e-8 + 1.0e-8 * first.abs() + 1.0e-8 * last.abs()
     if (start - first).abs() > tolerance || (stop - last).abs() > tolerance {
       fail("STRT/STOP disagree with ASCII depth endpoints")
     }
